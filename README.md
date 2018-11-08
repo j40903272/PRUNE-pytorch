@@ -40,7 +40,7 @@ from preprocess import preprocess
 from model import PRUNE
 from train import train
 
-graph = np.loadtxt(args.input_graph).astype(np.int64)
+graph = np.loadtxt("../example/edgelist.txt").astype(np.int64)
 nodeCount = int(graph.max()) + 1
 data_loader, PMI_dict = preprocess(graph)
 
