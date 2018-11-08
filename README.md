@@ -38,6 +38,7 @@ The embedding weights would be in **prune_weight.pkl**
 import numpy as np
 from preprocess import preprocess
 from model import PRUNE
+from train import train
 
 graph = np.loadtxt(args.input_graph).astype(np.int64)
 nodeCount = int(graph.max()) + 1
