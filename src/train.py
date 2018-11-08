@@ -1,9 +1,14 @@
 import pickle
 import torch
 import numpy as np
+import argparse
 
 from preprocess import preprocess
 from model import PRUNE
+
+parser = argparse.ArgumentParser(description='Malconv-keras classifier training')
+parser.add_argument('input_graph', type=str, default='../example/edgelist.txt')
+
 
 def train(model, train_loader, epochs=100, lr=0.001):
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
@@ -25,7 +30,8 @@ def train(model, train_loader, epochs=100, lr=0.001):
 
     
 if __name__ == '__main__':
-    graph = np.loadtxt('../example/edgelist.txt').astype(np.int64)
+    args = parser.parse_args()
+    graph = np.loadtxt(args.input_graph).astype(np.int64)
     nodeCount = int(graph.max()) + 1
     data_loader, PMI_dict = preprocess(graph)
     

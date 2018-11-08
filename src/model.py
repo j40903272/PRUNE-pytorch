@@ -20,7 +20,9 @@ class PRUNE(nn.Module):
         
         # W_shared
         w_init = np.identity(n_prox) + abs(np.random.randn(n_prox, n_prox) / 1000.0)
-        self.w_shared = torch.from_numpy(w_init).float().cuda()
+        self.w_shared = torch.from_numpy(w_init).float()
+        if torch.cuda.is_available():
+            self.w_shared = self.w_shared.cuda()
         
         # global node ranking score
         self.rank = nn.Sequential(
